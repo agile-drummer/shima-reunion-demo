@@ -94,3 +94,18 @@
   .hero .date-card strong{font-size:16px}
   .hero .postcard-stack{margin-top:0}
 }
+
+
+/* Compact organizer avatars */
+.organizer-team-grid .team-member{padding:24px}
+.organizer-team-grid .team-member img{width:104px;height:104px;margin:0 auto 4px;border-radius:18px;object-fit:cover;box-shadow:0 8px 22px #1737461c}
+.organizer-team-grid .team-member>div{padding:14px 0 0}
+@media(max-width:820px){
+  .organizer-team-grid .team-member{grid-template-columns:84px 1fr;gap:18px;align-items:center;padding:18px}
+  .organizer-team-grid .team-member img{width:84px;height:84px;min-height:0;margin:0;border-radius:15px}
+  .organizer-team-grid .team-member>div{padding:0}
+}
+@media(max-width:520px){
+  .organizer-team-grid .team-member{grid-template-columns:72px 1fr;gap:14px;padding:15px}
+  .organizer-team-grid .team-member img{width:72px;height:72px;border-radius:13px}
+}
