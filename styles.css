@@ -187,3 +187,30 @@
     height:64px;
   }
 }
+
+
+/* Compact desktop first view */
+@media(min-width:901px){
+  .hero{
+    min-height:min(760px,100svh);
+    grid-template-columns:minmax(450px,.9fr) minmax(480px,1.1fr);
+    gap:clamp(32px,4vw,56px);
+    padding:100px clamp(32px,4.3vw,72px) 40px;
+  }
+  .hero h1{
+    font-size:clamp(40px,4vw,56px);
+    line-height:1.38;
+    letter-spacing:.045em;
+    margin-bottom:16px;
+  }
+  .hero .lead{
+    font-size:clamp(14px,1.15vw,17px);
+    line-height:1.75;
+    margin-bottom:20px;
+  }
+  .hero .eyebrow{margin-bottom:14px}
+  .hero .button{min-height:50px}
+  .hero .date-card{margin-top:24px}
+  .hero-gallery{height:min(43vw,500px)}
+  .gallery-controls{margin-top:8px}
+}
