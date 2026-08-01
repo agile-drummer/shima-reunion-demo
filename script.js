@@ -61,3 +61,41 @@ if(heroSlides.length>1&&galleryDots){
     else startHeroSlideshow();
   });
 }
+
+
+// LP型CTA：読み進めた後に回答導線を再提示
+const finalInterestCta=document.querySelector('#final-interest-cta');
+const stickyInterestCta=document.querySelector('#sticky-interest-cta');
+const interestJumpButtons=document.querySelectorAll('.interest-jump,#sticky-interest-cta');
+let interestSectionVisible=false;
+let finalCtaVisible=false;
+
+const updateStickyInterestCta=()=>{
+  if(!stickyInterestCta)return;
+  const hasScrolled=window.scrollY>window.innerHeight*.72;
+  const formIsOpen=interestPrototype&&!interestPrototype.hidden;
+  const isComplete=completion&&!completion.hidden;
+  stickyInterestCta.hidden=!hasScrolled||interestSectionVisible||finalCtaVisible||formIsOpen||isComplete;
+};
+
+interestJumpButtons.forEach(ctaButton=>ctaButton?.addEventListener('click',()=>{
+  if(openInterestSearch&&!openInterestSearch.hidden)openInterestSearch.click();
+  interestPrototype?.scrollIntoView({behavior:'smooth',block:'start'});
+  updateStickyInterestCta();
+}));
+
+if('IntersectionObserver'in window){
+  const ctaObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.target===document.querySelector('#interest'))interestSectionVisible=entry.isIntersecting;
+      if(entry.target===finalInterestCta)finalCtaVisible=entry.isIntersecting;
+    });
+    updateStickyInterestCta();
+  },{threshold:.15});
+  const interestSection=document.querySelector('#interest');
+  if(interestSection)ctaObserver.observe(interestSection);
+  if(finalInterestCta)ctaObserver.observe(finalInterestCta);
+}
+window.addEventListener('scroll',updateStickyInterestCta,{passive:true});
+window.addEventListener('resize',updateStickyInterestCta);
+updateStickyInterestCta();
