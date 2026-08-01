@@ -14,3 +14,35 @@ function selectCandidate(person){if(answered().has(person.id)){setMessage('こ�
 searchForm?.addEventListener('submit',event=>{event.preventDefault();const school=document.querySelector('#school').value,[classroom,teacher]=document.querySelector('#class-teacher').value.split('|'),query=document.querySelector('#name-query').value.trim().replace(/\s/g,'');const matches=dummyRoster.filter(person=>person.school===school&&person.classroom===classroom&&person.teacher===teacher&&`${person.surname}${person.givenName}`.includes(query)).slice(0,3);intentForm.hidden=true;completion.hidden=true;candidateList.replaceChildren();if(!matches.length){candidateArea.hidden=true;setMessage('候補が見つかりませんでした。選択内容や氏名の一部を確認してください。','error');return}matches.forEach(person=>{const candidate=document.createElement('button');candidate.type='button';candidate.className='candidate';candidate.innerHTML=`<strong>${mask(person.surname)} ${mask(person.givenName)}</strong><span>${person.school}・${person.classroom}・${person.teacher}</span>`;candidate.addEventListener('click',()=>selectCandidate(person));candidateList.append(candidate)});candidateArea.hidden=false;setMessage(`${matches.length}件の候補が見つかりました。`,'success')});
 intentForm?.addEventListener('submit',event=>{event.preventDefault();if(!selected)return;const intent=new FormData(intentForm).get('intent');if(!intent||!document.querySelector('#privacy-agreement').checked)return;const ids=answered();ids.add(selected.id);localStorage.setItem(storageKey,JSON.stringify([...ids]));intentForm.hidden=true;searchForm.hidden=true;candidateArea.hidden=true;completion.hidden=false;setMessage('');document.querySelector('#completion-message').textContent=`「${intent}」として受け付けました。`;completion.scrollIntoView({behavior:'smooth',block:'center'})});
 document.querySelector('#back-to-search')?.addEventListener('click',showSearch);
+
+
+// Issue #18: 思い出写真を4秒ごとにフェード切り替え
+const heroGallery=document.querySelector('.hero-gallery');
+const heroSlides=[...(heroGallery?.querySelectorAll('.photo')||[])];
+const galleryDots=document.querySelector('.gallery-dots');
+let heroSlideIndex=0;
+let heroSlideTimer;
+if(heroSlides.length>1&&galleryDots){
+  heroSlides.forEach((_,index)=>{
+    const dot=document.createElement('span');
+    if(index===0)dot.classList.add('is-active');
+    galleryDots.append(dot);
+  });
+  const dots=[...galleryDots.children];
+  const showHeroSlide=index=>{
+    heroSlides[heroSlideIndex].classList.remove('is-active');
+    dots[heroSlideIndex].classList.remove('is-active');
+    heroSlideIndex=index%heroSlides.length;
+    heroSlides[heroSlideIndex].classList.add('is-active');
+    dots[heroSlideIndex].classList.add('is-active');
+  };
+  const startHeroSlideshow=()=>{
+    clearInterval(heroSlideTimer);
+    heroSlideTimer=setInterval(()=>showHeroSlide(heroSlideIndex+1),4000);
+  };
+  startHeroSlideshow();
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)clearInterval(heroSlideTimer);
+    else startHeroSlideshow();
+  });
+}
