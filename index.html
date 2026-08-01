@@ -30,7 +30,7 @@
         <h1>懐かしい仲間と、<br>変わりゆく糸島に<br>会いに行こう。</h1>
         <p class="lead">久しぶりの再会と、大人になった今だから気づける糸島の魅力。<br>懐かしさを、未来のつながりへ。</p>
         <div class="actions">
-          <a class="button primary" href="#interest">参加意向について</a>
+          <a class="button primary" href="#interest">参加意向を回答する</a>
           <a class="button text-link" href="#about">開催概要を見る</a>
         </div>
         <div class="date-card" aria-label="開催予定時期">
@@ -51,20 +51,10 @@
     </section>
 
     <section id="interest" class="notice section-shell">
-      <p class="section-kicker">FIRST STEP · AUGUST 2026</p>
-      <h2>まずは、お盆ごろに<br>「参加してみたい？」を聞かせてください。</h2>
-      <p>8月10〜16日ごろに、同級生へ参加意向をお聞きする予定です。まだ正式な出欠ではありません。日程や会場を決めるための、気軽な第一歩です。</p>
-      <div class="notice-grid">
-        <div><span>01</span><h3>お盆ごろ</h3><p>LINEで第一報をお届け</p></div>
-        <div><span>02</span><h3>8月末まで</h3><p>参加意向をゆっくり回答</p></div>
-        <div><span>03</span><h3>9月から</h3><p>会場と日程を具体化</p></div>
-      </div>
-      <button id="open-interest-search" class="button primary" type="button" aria-expanded="false" aria-controls="interest-prototype">参加意向を回答する</button>
+      <h2>参加意向を教えてください</h2>
+      <button id="open-interest-search" class="button primary" type="button" aria-expanded="false" aria-controls="interest-prototype">回答をはじめる</button>
       <div id="interest-prototype" class="interest-prototype" aria-labelledby="interest-form-title" hidden>
-        <div class="prototype-label">幹事レビュー用・ダミーデータ</div>
-        <h3 id="interest-form-title">あなたの情報を探して、参加意向を回答</h3>
-        <p class="prototype-intro">卒業時の情報を選び、氏名の一部を入力してください。候補はマスキングして最大3件だけ表示します。</p>
-        <ol class="form-steps" aria-label="回答手順"><li><span>1</span>本人を探す</li><li><span>2</span>候補を選ぶ</li><li><span>3</span>意向を回答</li></ol>
+        <h3 id="interest-form-title">本人を探す <small>（ダミー）</small></h3>
         <form id="person-search-form" class="interest-form">
           <div class="field-grid">
             <label>出身小学校<select id="school" required><option value="">選択してください</option><option selected>加也小</option><option>引津小</option><option>桜野小</option><option>不明</option></select></label>
@@ -82,7 +72,6 @@
           <button class="button primary form-submit" type="submit">この内容で回答する</button><button class="reset-link" type="button" id="back-to-search">選び直す</button>
         </form>
         <div id="completion" class="completion" hidden><span class="completion-mark">✓</span><h3>回答ありがとうございました</h3><p>これはダミーデータを使った体験版です。実際の名簿や回答は保存されません。</p><button class="reset-link" type="button" id="try-again">別のダミー名簿で試す</button></div>
-        <p class="prototype-note">この体験版の回答は、この端末のブラウザ内だけに一時保存されます。実運用では名簿をブラウザへ配信せず、サーバー側で照合します。</p>
       </div>
     </section>
 
