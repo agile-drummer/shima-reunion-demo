@@ -68,6 +68,15 @@
         <h3 id="interest-form-title">あなたの情報を探して、参加意向を回答</h3>
         <p class="prototype-intro">卒業時の情報を選び、氏名の一部を入力してください。候補はマスキングして最大3件だけ表示します。</p>
         <ol class="form-steps" aria-label="回答手順"><li><span>1</span>本人を探す</li><li><span>2</span>候補を選ぶ</li><li><span>3</span>意向を回答</li></ol>
+        <div class="demo-presets" aria-labelledby="demo-presets-title">
+          <strong id="demo-presets-title">すぐ試せるダミー候補</strong>
+          <p>どれかを選ぶと、検索条件を自動入力して候補を表示します。</p>
+          <div class="demo-preset-list">
+            <button type="button" class="demo-preset" data-school="加也小" data-class-teacher="1組|山先生（架空）" data-name-query="青"><span>加也小</span><strong>1組｜山先生（架空）</strong><small>氏名「青」で検索</small></button>
+            <button type="button" class="demo-preset" data-school="引津小" data-class-teacher="2組|海先生（架空）" data-name-query="白"><span>引津小</span><strong>2組｜海先生（架空）</strong><small>氏名「白」で検索</small></button>
+            <button type="button" class="demo-preset" data-school="桜野小" data-class-teacher="3組|森先生（架空）" data-name-query="朝"><span>桜野小</span><strong>3組｜森先生（架空）</strong><small>氏名「朝」で検索</small></button>
+          </div>
+        </div>
         <form id="person-search-form" class="interest-form">
           <div class="field-grid">
             <label>出身小学校<select id="school" required><option value="">選択してください</option><option>加也小</option><option>引津小</option><option>桜野小</option><option>不明</option></select></label>
