@@ -51,8 +51,11 @@
           <figure class="photo"><img src="assets/shima-current-school-gate.webp" alt="現在の校門と校舎" width="640" height="480" loading="lazy"></figure>
           <figure class="photo"><img src="assets/shima-school-blue-sky.webp" alt="青空の下に立つ志摩中学校の校舎" width="1600" height="1195" loading="lazy"></figure>
         </div>
-        <div class="gallery-dots" aria-hidden="true"></div>
-        <div class="tape tape-top" aria-hidden="true"></div>
+        <div class="gallery-controls" aria-label="思い出写真の切り替え">
+          <button class="gallery-arrow gallery-prev" type="button" aria-label="前の写真へ">‹</button>
+          <div class="gallery-dots" aria-label="写真を選ぶ"></div>
+          <button class="gallery-arrow gallery-next" type="button" aria-label="次の写真へ">›</button>
+        </div>
         <p class="location">ITOSHIMA, FUKUOKA</p>
       </div>
     </section>
@@ -81,7 +84,7 @@
           <label class="privacy-check"><input type="checkbox" id="privacy-agreement" required>入力した内容は、同窓会の準備にだけ使うことを確認しました</label>
           <button class="button primary form-submit" type="submit">この気持ちを送る</button><button class="reset-link" type="button" id="back-to-search">名前を選び直す</button>
         </form>
-        <div id="completion" class="completion" hidden><span class="completion-mark">✓</span><h3>ありがとう！ 🎉</h3><p id="completion-message"></p><p>もし入力を間違えたら、気軽に幹事へ連絡してくださいね。</p></div>
+        <div id="completion" class="completion" hidden><span class="completion-mark">✓</span><h3>ありがとう！ 🎉</h3><p id="completion-message"></p><p>もし入力を間違えたら、気軽に幹事へ連絡してくださいね。</p><p class="completion-next">この特設サイトは、これからも少しずつコンテンツを増やしていきます。楽しみにしていてくださいね 🌊</p></div>
       </div>
     </section>
 
@@ -135,9 +138,10 @@
     <section class="organizer-message section-shell" aria-labelledby="organizer-message-title">
       <div class="organizer-message-card">
         <div class="organizer-profile">
-          <div class="organizer-photo-placeholder" role="img" aria-label="幹事代表 山崎の顔写真（仮）">
-            <span>PHOTO</span>
-          </div>
+          <figure class="organizer-photo-placeholder">
+            <img src="assets/organizer-yamazaki-placeholder.svg" alt="幹事代表 山崎の顔写真（仮のイメージ）" width="640" height="640" loading="lazy">
+            <figcaption>顔写真（仮）</figcaption>
+          </figure>
           <p class="section-kicker">MESSAGE</p>
           <h2 id="organizer-message-title">幹事代表より</h2>
           <p class="organizer-name"><strong>山崎</strong><span>幹事代表／山崎設備</span></p>
