@@ -214,3 +214,8 @@
   .hero-gallery{height:min(43vw,500px)}
   .gallery-controls{margin-top:8px}
 }
+
+
+/* Separate the two closing reunion phrases */
+.footer-copy span{display:block}
+.footer-copy span+span{margin-top:14px}
