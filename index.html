@@ -39,7 +39,12 @@
         </div>
       </div>
       <div class="postcard-stack" aria-label="糸島の風景">
-        <figure class="photo main-photo"><img src="assets/hero-postcard.png" alt="海と山を眺める同級生たちの後ろ姿"></figure>
+        <div class="hero-gallery" role="region" aria-label="糸島の風景写真。スマートフォンでは左右にスワイプできます" tabindex="0">
+          <figure class="photo"><img src="assets/itoshima-lookout.webp" alt="展望台から海を眺める同級生たちのイメージ" width="1536" height="1024"></figure>
+          <figure class="photo"><img src="assets/itoshima-coastal-road.webp" alt="糸島の海沿いを走る道路のイメージ" width="1536" height="1024" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/itoshima-beach-torii.webp" alt="海岸と白い鳥居のある糸島の風景イメージ" width="1536" height="1024" loading="lazy"></figure>
+        </div>
+        <p class="swipe-hint" aria-hidden="true">← 左右にスワイプ →</p>
         <div class="tape tape-top" aria-hidden="true"></div>
         <p class="location">ITOSHIMA, FUKUOKA</p>
       </div>
@@ -56,6 +61,10 @@
       </div>
       <div class="interest-prototype" aria-labelledby="interest-form-title">
         <div class="prototype-label">幹事レビュー用・ダミーデータ</div>
+        <aside class="prototype-caution" aria-label="体験版についての注意">
+          <strong>このページは幹事確認用の体験版です</strong>
+          <p>表示される氏名・担任名・回答データはすべて架空です。回答はスプレッドシートへ送信されず、この端末のブラウザ内だけに保存されます。掲載写真はポストカードをもとにAIで補完したイメージです。</p>
+        </aside>
         <h3 id="interest-form-title">あなたの情報を探して、参加意向を回答</h3>
         <p class="prototype-intro">卒業時の情報を選び、氏名の一部を入力してください。候補はマスキングして最大3件だけ表示します。</p>
         <ol class="form-steps" aria-label="回答手順"><li><span>1</span>本人を探す</li><li><span>2</span>候補を選ぶ</li><li><span>3</span>意向を回答</li></ol>
