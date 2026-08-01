@@ -160,3 +160,37 @@
 .sticky-interest-cta span{font-size:11px;opacity:.9}
 .sticky-interest-cta strong{font-size:15px}
 @media(max-width:760px){.final-interest-cta{margin:0 16px 82px;padding:40px 22px}.sticky-interest-cta{right:12px;bottom:12px;left:12px;min-width:0;flex-direction:row;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:12px}.sticky-interest-cta span{font-size:12px}.sticky-interest-cta strong{font-size:14px}}
+
+
+/* Round organizer avatars with a face-focused crop for Kaneko */
+.organizer-team-grid .team-avatar{
+  width:76px;
+  height:76px;
+  min-height:0;
+  margin:0;
+  overflow:hidden;
+  border-radius:50%;
+  box-shadow:0 8px 22px #1737461c;
+}
+.organizer-team-grid .team-avatar img{
+  width:100%;
+  height:100%;
+  min-height:0;
+  margin:0;
+  border-radius:0;
+  object-fit:cover;
+  box-shadow:none;
+}
+.organizer-team-grid .team-avatar-kaneko img{
+  width:240%;
+  height:240%;
+  max-width:none;
+  transform:translate(-52%,-4%);
+  object-position:center top;
+}
+@media(max-width:520px){
+  .organizer-team-grid .team-avatar{
+    width:64px;
+    height:64px;
+  }
+}
