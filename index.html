@@ -16,7 +16,7 @@
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">メニュー</button>
     <nav id="site-nav" aria-label="メインメニュー">
       <a href="#about">同窓会について</a>
-      <a href="#interest">参加意向</a>
+      <a href="#interest">参加してみる？</a>
       <a href="#itoshima">糸島の今</a>
       <a href="#schedule">開催まで</a>
       <a href="#safety">安心して参加するために</a>
@@ -30,7 +30,6 @@
         <h1>懐かしい仲間と、<br>変わりゆく糸島に<br>会いに行こう。</h1>
         <p class="lead">久しぶりの再会と、大人になった今だから気づける糸島の魅力。<br>懐かしさを、未来のつながりへ。</p>
         <div class="actions">
-          <a class="button primary" href="#interest">参加意向について</a>
           <a class="button text-link" href="#about">開催概要を見る</a>
         </div>
         <div class="date-card" aria-label="開催予定時期">
@@ -39,39 +38,50 @@
         </div>
       </div>
       <div class="postcard-stack" aria-label="糸島の風景">
-        <div class="hero-gallery" role="region" aria-label="糸島の風景写真。スマートフォンでは左右にスワイプできます" tabindex="0">
-          <figure class="photo"><img src="assets/itoshima-lookout.webp" alt="展望台から海を眺める同級生たちのイメージ" width="1536" height="1024"></figure>
+        <div class="hero-gallery" role="region" aria-label="糸島と志摩中の思い出写真が自動で切り替わります" aria-live="off">
+          <figure class="photo is-active"><img src="assets/itoshima-lookout.webp" alt="展望台から海を眺める同級生たちのイメージ" width="1536" height="1024"></figure>
           <figure class="photo"><img src="assets/itoshima-coastal-road.webp" alt="糸島の海沿いを走る道路のイメージ" width="1536" height="1024" loading="lazy"></figure>
           <figure class="photo"><img src="assets/itoshima-beach-torii.webp" alt="海岸と白い鳥居のある糸島の風景イメージ" width="1536" height="1024" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-school-sakura.webp" alt="桜が咲く学校の正門" width="1500" height="695" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-old-school-building.webp" alt="思い出の旧校舎" width="640" height="480" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-school-gate.webp" alt="学校の正門から見た校舎" width="330" height="247" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-school-ceremony.webp" alt="体育館で行われた学校行事" width="740" height="414" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-chorus-festival.webp" alt="体育館の文化発表会で合唱する生徒たち" width="1600" height="1066" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-school-aerial.webp" alt="上空から見た志摩中学校の校舎と体育館" width="1097" height="415" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-current-school-gate.webp" alt="現在の校門と校舎" width="640" height="480" loading="lazy"></figure>
+          <figure class="photo"><img src="assets/shima-school-blue-sky.webp" alt="青空の下に立つ志摩中学校の校舎" width="1600" height="1195" loading="lazy"></figure>
         </div>
-        <p class="swipe-hint" aria-hidden="true">← 左右にスワイプ →</p>
+        <div class="gallery-dots" aria-hidden="true"></div>
         <div class="tape tape-top" aria-hidden="true"></div>
         <p class="location">ITOSHIMA, FUKUOKA</p>
       </div>
     </section>
 
     <section id="interest" class="notice section-shell">
-      <h2>参加意向を回答する</h2>
-      <button id="open-interest-search" class="button primary" type="button" aria-expanded="false" aria-controls="interest-prototype">参加意向を回答する</button>
+      <p class="section-kicker">まずは気軽に</p>
+      <h2>同窓会、行けそう？ 👋</h2>
+      <p class="interest-invitation">まだ予定がわからなくても大丈夫。今の気持ちを、気軽に聞かせてください。</p>
+      <button id="open-interest-search" class="button primary" type="button" aria-expanded="false" aria-controls="interest-prototype">ちょっと答えてみる</button>
       <div id="interest-prototype" class="interest-prototype" aria-labelledby="interest-form-title" hidden>
-        <h3 id="interest-form-title">本人を探す</h3>
+        <h3 id="interest-form-title">まずは、あなたを見つけよう 🔍</h3>
+        <p class="prototype-intro">覚えている範囲で選んでください。</p>
         <form id="person-search-form" class="interest-form">
           <div class="field-grid">
-            <label>出身小学校<select id="school" required><option value="">選択してください</option><option selected>加也小</option><option>引津小</option><option>桜野小</option><option>不明</option></select></label>
-            <label>3年時のクラス・担任<select id="class-teacher" required><option value="">選択してください</option><option value="1組|山先生（架空）" selected>1組｜山先生（架空）</option><option value="2組|海先生（架空）">2組｜海先生（架空）</option><option value="3組|森先生（架空）">3組｜森先生（架空）</option><option value="4組|空先生（架空）">4組｜空先生（架空）</option></select></label>
-            <label>卒業時の姓名の一部<input id="name-query" type="text" minlength="1" maxlength="8" autocomplete="off" value="青" placeholder="例：青、海斗" required></label>
+            <label>🏫 どの小学校だった？<select id="school" required><option value="">選んでください</option><option selected>加也小</option><option>引津小</option><option>桜野小</option><option>不明</option></select></label>
+            <label>📚 3年生のクラス・担任は？<select id="class-teacher" required><option value="">選んでください</option><option value="1組|山先生（架空）" selected>1組｜山先生（架空）</option><option value="2組|海先生（架空）">2組｜海先生（架空）</option><option value="3組|森先生（架空）">3組｜森先生（架空）</option><option value="4組|空先生（架空）">4組｜空先生（架空）</option></select></label>
+            <label>✏️ 卒業したころの名前（一部でもOK）<input id="name-query" type="text" minlength="1" maxlength="8" autocomplete="off" value="青" placeholder="例：青、海斗" required></label>
           </div>
-          <button class="button primary form-submit" type="submit">候補を探す</button>
+          <button class="button primary form-submit" type="submit">わたしを探す</button>
         </form>
         <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
-        <div id="candidate-area" class="candidate-area" hidden><h4>ご本人と思われる候補を選んでください</h4><div id="candidate-list" class="candidate-list"></div></div>
+        <div id="candidate-area" class="candidate-area" hidden><h4>この中に、あなたはいる？ 👀</h4><div id="candidate-list" class="candidate-list"></div></div>
         <form id="intent-form" class="intent-form" hidden>
-          <div class="selected-person"><span>選択中</span><strong id="selected-person"></strong></div>
-          <fieldset><legend>現時点の参加意向を教えてください</legend><label><input type="radio" name="intent" value="参加したい" required><span>参加したい</span></label><label><input type="radio" name="intent" value="都合が合えば"><span>都合が合えば参加したい</span></label><label><input type="radio" name="intent" value="欠席予定"><span>今回は欠席予定</span></label></fieldset>
-          <label class="privacy-check"><input type="checkbox" id="privacy-agreement" required>入力情報を同窓会の開催準備にのみ利用することに同意します</label>
-          <button class="button primary form-submit" type="submit">この内容で回答する</button><button class="reset-link" type="button" id="back-to-search">選び直す</button>
+          <div class="selected-person"><span>あなた</span><strong id="selected-person"></strong></div>
+          <fieldset><legend>今の気持ちに近いものは？</legend><label><input type="radio" name="intent" value="参加したい" required><span>🙌 行きたい！</span></label><label><input type="radio" name="intent" value="都合が合えば"><span>🤔 予定が合えば行きたい</span></label><label><input type="radio" name="intent" value="欠席予定"><span>🙏 今回はむずかしそう</span></label></fieldset>
+          <label class="privacy-check"><input type="checkbox" id="privacy-agreement" required>入力した内容は、同窓会の準備にだけ使うことを確認しました</label>
+          <button class="button primary form-submit" type="submit">この気持ちを送る</button><button class="reset-link" type="button" id="back-to-search">名前を選び直す</button>
         </form>
-        <div id="completion" class="completion" hidden><span class="completion-mark">✓</span><h3>回答ありがとうございました</h3><p id="completion-message"></p><p>入力を間違えた場合は、幹事へ連絡してください。</p></div>
+        <div id="completion" class="completion" hidden><span class="completion-mark">✓</span><h3>ありがとう！ 🎉</h3><p id="completion-message"></p><p>もし入力を間違えたら、気軽に幹事へ連絡してくださいね。</p></div>
       </div>
     </section>
 
@@ -106,22 +116,43 @@
 
     <section id="schedule" class="section-shell schedule">
       <p class="section-kicker">ROADMAP</p>
-      <h2>開催までの流れ</h2>
+      <h2>再会の日まで 🌱</h2>
       <ol>
-        <li><time>8月</time><div><h3>参加意向を聞く</h3><p>お盆ごろに第一報。月末まで回答を集めます。</p></div></li>
-        <li><time>9〜10月</time><div><h3>日程と会場を決める</h3><p>参加見込みをもとに候補を絞ります。</p></div></li>
-        <li><time>11月</time><div><h3>正式な出欠確認</h3><p>内容と参加方法を詳しくご案内します。</p></div></li>
+        <li><time>8月</time><div><h3>まずは「行けそう？」を聞かせて</h3><p>お盆ごろにLINEでお知らせします。まだ正式な出欠ではありません。</p></div></li>
+        <li><time>9〜10月</time><div><h3>みんなが集まりやすい日を探す</h3><p>届いた声をもとに、日程と場所を考えます。</p></div></li>
+        <li><time>11月</time><div><h3>くわしいお知らせを届ける</h3><p>日程や場所が決まったら、あらためてLINEでご案内します。</p></div></li>
         <li><time>12〜1月</time><div><h3>ただいま、志摩中。</h3><p>懐かしい仲間と糸島に会う日。</p></div></li>
       </ol>
     </section>
 
     <section id="safety" class="safety section-shell">
       <p class="section-kicker">A SAFE REUNION</p>
-      <h2>安心して参加できる場に。</h2>
+      <h2>みんなが心地よく過ごせるように 🫶</h2>
       <div class="safety-list">
         <p>参加や返信を強制しません</p><p>連絡先を無断で共有しません</p><p>写真掲載は本人の意向を確認します</p><p>宗教・政治・営業・ネットワークビジネス等の勧誘は禁止します</p>
       </div>
     </section>
+    <section class="organizer-message section-shell" aria-labelledby="organizer-message-title">
+      <div class="organizer-message-card">
+        <div class="organizer-profile">
+          <div class="organizer-photo-placeholder" role="img" aria-label="幹事代表 山崎の顔写真（仮）">
+            <span>PHOTO</span>
+          </div>
+          <p class="section-kicker">MESSAGE</p>
+          <h2 id="organizer-message-title">幹事代表より</h2>
+          <p class="organizer-name"><strong>山崎</strong><span>幹事代表／山崎設備</span></p>
+        </div>
+        <div class="organizer-copy">
+          <p>先日の熊本地方の地震で被災された皆さまに、心よりお見舞い申し上げます。一日も早く穏やかな日常が戻りますことを、心から願っています。</p>
+          <p>志摩を離れて暮らす同級生にとって、帰省は介護や法事など、家族の用事がきっかけになることも多いと思います。今回の同窓会が、懐かしい仲間に会うという、もうひとつの帰省の楽しみになればうれしいです。</p>
+          <p>そして、今もこの地域で暮らしている皆さんにも、旧知を温めながら、お互いの今や、変わりゆく志摩の新しい一面を知る機会にしてもらえたらと思っています。</p>
+          <p>私自身、今は二人の子どもが志摩中に通っています。毎週末、部活動の応援でグラウンドに立つたびに、自分たちが過ごした頃の記憶と、今の志摩中の姿が重なります。</p>
+          <p>一年を締めくくる時期、そして新しい年を迎える節目に、みんなで「ただいま」と言える日をつくりたい。久しぶりの人も、いつも顔を合わせる人も、どうぞ気軽に参加してください。</p>
+          <p class="organizer-signature">また志摩で会えることを、楽しみにしています。</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
