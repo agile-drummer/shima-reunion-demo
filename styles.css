@@ -138,3 +138,11 @@
   .organizer-team-grid .team-member h3{font-size:20px}
   .organizer-team-grid .team-comment{font-size:12px}
 }
+
+
+/* Organizer helper recruitment */
+.helper-recruitment{display:flex;align-items:center;gap:18px;margin-top:24px;padding:20px 24px;border:1px dashed #ef685288;border-radius:16px;background:#fff5ef}
+.helper-recruitment>span{font-size:34px;line-height:1}
+.helper-recruitment h3{margin:0;color:var(--navy);font:700 21px/1.5 var(--serif)}
+.helper-recruitment p{margin:3px 0 0;color:var(--muted);font-size:14px;line-height:1.75}
+@media(max-width:520px){.helper-recruitment{align-items:flex-start;gap:12px;padding:17px}.helper-recruitment>span{font-size:28px}.helper-recruitment h3{font-size:18px}.helper-recruitment p{font-size:13px}}
