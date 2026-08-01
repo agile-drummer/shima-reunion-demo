@@ -71,8 +71,7 @@
         <form id="person-search-form" class="interest-form">
           <div class="field-grid">
             <label>出身小学校<select id="school" required><option value="">選択してください</option><option>加也小</option><option>引津小</option><option>桜野小</option><option>不明</option></select></label>
-            <label>3年時のクラス<select id="classroom" required><option value="">選択してください</option><option>1組</option><option>2組</option><option>3組</option><option>4組</option></select></label>
-            <label>3年時の担任<select id="teacher" required><option value="">選択してください</option><option>山先生（架空）</option><option>海先生（架空）</option><option>森先生（架空）</option><option>空先生（架空）</option></select></label>
+            <label>3年時のクラス・担任<select id="class-teacher" required><option value="">選択してください</option><option value="1組|山先生（架空）">1組｜山先生（架空）</option><option value="2組|海先生（架空）">2組｜海先生（架空）</option><option value="3組|森先生（架空）">3組｜森先生（架空）</option><option value="4組|空先生（架空）">4組｜空先生（架空）</option></select></label>
             <label>卒業時の姓名の一部<input id="name-query" type="text" minlength="1" maxlength="8" autocomplete="off" placeholder="例：青、海斗" required></label>
           </div>
           <button class="button primary form-submit" type="submit">候補を探す</button>
