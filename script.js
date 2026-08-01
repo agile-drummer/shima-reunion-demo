@@ -99,3 +99,9 @@ if('IntersectionObserver'in window){
 window.addEventListener('scroll',updateStickyInterestCta,{passive:true});
 window.addEventListener('resize',updateStickyInterestCta);
 updateStickyInterestCta();
+
+// 開催時期の「初旬」が単独で折り返されないようにする
+const reunionDate=document.querySelector('.date-card span');
+if(reunionDate){
+  reunionDate.innerHTML='2026年12月末–<span style="white-space:nowrap">2027年1月初旬</span>';
+}
