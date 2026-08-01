@@ -181,13 +181,6 @@
   object-fit:cover;
   box-shadow:none;
 }
-.organizer-team-grid .team-avatar-kaneko img{
-  width:240%;
-  height:240%;
-  max-width:none;
-  transform:translate(-52%,-4%);
-  object-position:center top;
-}
 @media(max-width:520px){
   .organizer-team-grid .team-avatar{
     width:64px;
