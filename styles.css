@@ -109,3 +109,32 @@
   .organizer-team-grid .team-member{grid-template-columns:72px 1fr;gap:14px;padding:15px}
   .organizer-team-grid .team-member img{width:72px;height:72px;border-radius:13px}
 }
+
+
+/* Compact business-card layout for organizer team */
+.organizer-team-grid .team-member{
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr);
+  gap:16px;
+  align-items:center;
+  min-height:0;
+  padding:16px;
+}
+.organizer-team-grid .team-member img{
+  width:76px;
+  height:76px;
+  min-height:0;
+  margin:0;
+  border-radius:14px;
+}
+.organizer-team-grid .team-member>div{min-width:0;padding:0}
+.organizer-team-grid .team-school{margin-bottom:4px;padding:2px 9px}
+.organizer-team-grid .team-member h3{font-size:22px;line-height:1.25}
+.organizer-team-grid .team-role{margin:1px 0 7px;font-size:11px;line-height:1.5}
+.organizer-team-grid .team-comment{padding-top:7px;font-size:13px;line-height:1.55}
+@media(max-width:520px){
+  .organizer-team-grid .team-member{grid-template-columns:64px minmax(0,1fr);gap:13px;padding:13px}
+  .organizer-team-grid .team-member img{width:64px;height:64px}
+  .organizer-team-grid .team-member h3{font-size:20px}
+  .organizer-team-grid .team-comment{font-size:12px}
+}
