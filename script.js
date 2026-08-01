@@ -10,36 +10,51 @@ const openInterestSearch=document.querySelector('#open-interest-search'),interes
 openInterestSearch?.addEventListener('click',()=>{interestPrototype.hidden=false;openInterestSearch.hidden=true;openInterestSearch.setAttribute('aria-expanded','true');interestPrototype.scrollIntoView({behavior:'smooth',block:'start'});searchForm?.querySelector('button[type="submit"]')?.focus({preventScroll:true})});
 function setMessage(text,type='info'){message.textContent=text;message.className=`form-message ${type}`}
 function showSearch(){selected=null;intentForm.hidden=true;completion.hidden=true;candidateArea.hidden=true;searchForm.hidden=false;setMessage('')}
-function selectCandidate(person){if(answered().has(person.id)){setMessage('この情報では受付できませんでした。入力内容をご確認いただくか、幹事へお問い合わせください。','error');return}selected=person;selectedPerson.textContent=`${mask(person.surname)} ${mask(person.givenName)}・${person.classroom}・${person.teacher}`;candidateArea.hidden=true;intentForm.hidden=false;setMessage('候補を選択しました。参加意向を回答してください。','success');intentForm.scrollIntoView({behavior:'smooth',block:'center'})}
+function selectCandidate(person){selected=person;selectedPerson.textContent=`${mask(person.surname)} ${mask(person.givenName)}・${person.classroom}・${person.teacher}`;candidateArea.hidden=true;intentForm.hidden=false;setMessage('候補を選択しました。参加意向を回答してください。','success');intentForm.scrollIntoView({behavior:'smooth',block:'center'})}
 searchForm?.addEventListener('submit',event=>{event.preventDefault();const school=document.querySelector('#school').value,[classroom,teacher]=document.querySelector('#class-teacher').value.split('|'),query=document.querySelector('#name-query').value.trim().replace(/\s/g,'');const matches=dummyRoster.filter(person=>person.school===school&&person.classroom===classroom&&person.teacher===teacher&&`${person.surname}${person.givenName}`.includes(query)).slice(0,3);intentForm.hidden=true;completion.hidden=true;candidateList.replaceChildren();if(!matches.length){candidateArea.hidden=true;setMessage('候補が見つかりませんでした。選択内容や氏名の一部を確認してください。','error');return}matches.forEach(person=>{const candidate=document.createElement('button');candidate.type='button';candidate.className='candidate';candidate.innerHTML=`<strong>${mask(person.surname)} ${mask(person.givenName)}</strong><span>${person.school}・${person.classroom}・${person.teacher}</span>`;candidate.addEventListener('click',()=>selectCandidate(person));candidateList.append(candidate)});candidateArea.hidden=false;setMessage(`${matches.length}件の候補が見つかりました。`,'success')});
-intentForm?.addEventListener('submit',event=>{event.preventDefault();if(!selected)return;const intent=new FormData(intentForm).get('intent');if(!intent||!document.querySelector('#privacy-agreement').checked)return;const ids=answered();ids.add(selected.id);localStorage.setItem(storageKey,JSON.stringify([...ids]));intentForm.hidden=true;searchForm.hidden=true;candidateArea.hidden=true;completion.hidden=false;setMessage('');document.querySelector('#completion-message').textContent=`「${intent}」として受け付けました。`;completion.scrollIntoView({behavior:'smooth',block:'center'})});
+intentForm?.addEventListener('submit',event=>{event.preventDefault();if(!selected)return;const intent=new FormData(intentForm).get('intent');if(!intent||!document.querySelector('#privacy-agreement').checked)return;intentForm.hidden=true;searchForm.hidden=true;candidateArea.hidden=true;completion.hidden=false;setMessage('');document.querySelector('#completion-message').textContent=`「${intent}」として受け付けました。`;completion.scrollIntoView({behavior:'smooth',block:'center'})});
 document.querySelector('#back-to-search')?.addEventListener('click',showSearch);
 
 
-// Issue #18: 思い出写真を4秒ごとにフェード切り替え
+// 思い出写真：自動再生＋手動切り替え
 const heroGallery=document.querySelector('.hero-gallery');
 const heroSlides=[...(heroGallery?.querySelectorAll('.photo')||[])];
 const galleryDots=document.querySelector('.gallery-dots');
+const galleryPrev=document.querySelector('.gallery-prev');
+const galleryNext=document.querySelector('.gallery-next');
 let heroSlideIndex=0;
 let heroSlideTimer;
 if(heroSlides.length>1&&galleryDots){
-  heroSlides.forEach((_,index)=>{
-    const dot=document.createElement('span');
-    if(index===0)dot.classList.add('is-active');
-    galleryDots.append(dot);
-  });
-  const dots=[...galleryDots.children];
   const showHeroSlide=index=>{
     heroSlides[heroSlideIndex].classList.remove('is-active');
-    dots[heroSlideIndex].classList.remove('is-active');
-    heroSlideIndex=index%heroSlides.length;
+    galleryDots.children[heroSlideIndex]?.classList.remove('is-active');
+    galleryDots.children[heroSlideIndex]?.removeAttribute('aria-current');
+    heroSlideIndex=(index+heroSlides.length)%heroSlides.length;
     heroSlides[heroSlideIndex].classList.add('is-active');
-    dots[heroSlideIndex].classList.add('is-active');
+    galleryDots.children[heroSlideIndex]?.classList.add('is-active');
+    galleryDots.children[heroSlideIndex]?.setAttribute('aria-current','true');
   };
   const startHeroSlideshow=()=>{
     clearInterval(heroSlideTimer);
     heroSlideTimer=setInterval(()=>showHeroSlide(heroSlideIndex+1),4000);
   };
+  const chooseHeroSlide=index=>{showHeroSlide(index);startHeroSlideshow()};
+  heroSlides.forEach((slide,index)=>{
+    const dot=document.createElement('button');
+    dot.type='button';
+    dot.className='gallery-dot';
+    dot.setAttribute('aria-label',`${index+1}枚目の写真を表示`);
+    if(index===0){dot.classList.add('is-active');dot.setAttribute('aria-current','true')}
+    dot.addEventListener('click',()=>chooseHeroSlide(index));
+    galleryDots.append(dot);
+  });
+  galleryPrev?.addEventListener('click',()=>chooseHeroSlide(heroSlideIndex-1));
+  galleryNext?.addEventListener('click',()=>chooseHeroSlide(heroSlideIndex+1));
+  heroGallery?.addEventListener('keydown',event=>{
+    if(event.key==='ArrowLeft')chooseHeroSlide(heroSlideIndex-1);
+    if(event.key==='ArrowRight')chooseHeroSlide(heroSlideIndex+1);
+  });
+  heroGallery?.setAttribute('tabindex','0');
   startHeroSlideshow();
   document.addEventListener('visibilitychange',()=>{
     if(document.hidden)clearInterval(heroSlideTimer);
