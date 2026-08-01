@@ -64,3 +64,19 @@
 .coming-soon-label{position:relative;margin:26px 0 2px;color:#fff5b8;font:600 clamp(28px,4vw,46px)/1.2 var(--hand);letter-spacing:.08em;transform:rotate(-1deg)}
 .coming-soon-note{position:relative;margin:8px 0 0;color:#e9e5d2;font:500 14px/1.8 var(--hand);letter-spacing:.04em}
 @media(max-width:700px){.coming-soon-board{padding:30px 20px 26px;border-width:9px}.board-items{grid-template-columns:1fr}.board-items article{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 8px}.board-items article+article{border-left:0;border-top:1px dashed #e9e3c077}.board-items span{margin:0;font-size:25px}.board-items h3{font-size:21px}.coming-soon-label{margin-top:24px;font-size:32px}}
+
+
+/* Organizer team */
+.organizer-team{padding-top:0;padding-bottom:112px}
+.organizer-team>h2{margin-bottom:8px}
+.organizer-team-intro{margin:0 0 38px;color:var(--muted)}
+.organizer-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.team-member{overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 38px #49677314}
+.team-member img{width:100%;aspect-ratio:1;object-fit:cover}
+.team-member>div{padding:24px 24px 28px}
+.team-school{display:inline-block;margin:0 0 9px;padding:3px 11px;border-radius:99px;background:#e9f5f4;color:var(--blue);font-size:12px;font-weight:700}
+.team-member h3{margin:0;color:var(--navy);font:700 27px/1.4 var(--serif)}
+.team-role{margin:3px 0 15px;color:var(--muted);font-size:13px;font-weight:700}
+.team-comment{margin:0;padding-top:15px;border-top:1px solid var(--line);font-family:var(--hand);font-size:16px;line-height:1.75;color:var(--ink)}
+@media(max-width:820px){.organizer-team-grid{grid-template-columns:1fr}.team-member{display:grid;grid-template-columns:140px 1fr}.team-member img{height:100%;min-height:210px}.team-member>div{padding:22px}.team-comment{font-size:15px}}
+@media(max-width:520px){.organizer-team{padding-bottom:82px}.team-member{grid-template-columns:112px 1fr}.team-member img{min-height:190px}.team-member>div{padding:18px 16px}.team-member h3{font-size:23px}.team-role{font-size:12px}.team-comment{font-size:14px;line-height:1.65}}
