@@ -1,0 +1,36 @@
+name: Apply demo menu fix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-menu-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert menu fix script and refresh cache key
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text()
+          marker = '<script src="script.js?v=20260802-3"></script>'
+          replacement = '<script src="menu-fix.js?v=20260803-1"></script>\n  <script src="script.js?v=20260803-1"></script>'
+          if marker in text:
+              text = text.replace(marker, replacement)
+          elif 'menu-fix.js' not in text:
+              text = text.replace('</body>', '  <script src="menu-fix.js?v=20260803-1"></script>\n</body>')
+          path.write_text(text)
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "fix: load robust demo menu script" || exit 0
+          git push
