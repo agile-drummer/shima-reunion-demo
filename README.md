@@ -10,7 +10,7 @@ https://agile-drummer.github.io/shima-reunion-demo/
 
 ## デモの設定
 
-舞台は、海に囲まれた架空の学校「島中学校」です。
+舞台は、海に囲まれた架空の学校「あつまれ島中学校」です。
 
 - サイト名：あつまれ島中学校
 - 出身小学校：どんぐり小／しおかぜ小／こもれび小
@@ -43,6 +43,23 @@ https://agile-drummer.github.io/shima-reunion-demo/
 
 回答内容は外部APIやGoogleスプレッドシートへ送信せず、利用中のブラウザの `localStorage` にだけ保存します。
 
+## 公式LINE・運営画面デモ
+
+公開サイトの最下部から、次の操作を試せます。
+
+- 公式LINEを友だち追加したように見えるデモ
+- LINEログインを模した運営メンバーログイン
+- 架空名簿の絞り込み
+- 担当者、参加状況、連絡状況の更新
+- 参加意向の横棒グラフ
+- 公式LINE友だちタグ
+
+運営画面のURL：
+
+https://agile-drummer.github.io/shima-reunion-demo/organizer/
+
+認証やLINE連携は実行せず、操作状態はブラウザの `localStorage` に保存します。
+
 ## 本番版との分離
 
 | 項目 | 公開デモ | 本番版 |
@@ -51,6 +68,8 @@ https://agile-drummer.github.io/shima-reunion-demo/
 | リポジトリ | Public | Private |
 | データ | 架空のダミーデータ | 限定共有データ |
 | 保存 | localStorage | Pages Functions経由 |
+| LINEログイン | 画面上のモック | LINE Login API |
+| 公式LINE | 追加済み表示のモック | LINE公式アカウント |
 | 認証情報 | なし | Cloudflare Secrets |
 
 本番版の名簿、回答データ、個人情報、秘密鍵は、この公開リポジトリには保存しません。
@@ -61,7 +80,7 @@ https://agile-drummer.github.io/shima-reunion-demo/
 - CSS
 - JavaScript
 - GitHub Pages
-- localStorage（デモ回答のみ）
+- localStorage
 
 ## 安全方針
 
