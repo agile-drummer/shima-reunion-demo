@@ -44,18 +44,15 @@ allSlides.slice(2).forEach(slide=>slide.remove());
 const gallery=$('.hero-gallery');
 if(gallery)gallery.setAttribute('aria-label','島の思い出写真が自動で切り替わります');
 
-const roster=[
-{id:'D001',surname:'モコ',givenName:'リス',school:'どんぐり小',classroom:'1組',teacher:'フクロウ先生'},
-{id:'D002',surname:'ペンタ',givenName:'ペンギン',school:'しおかぜ小',classroom:'2組',teacher:'カモメ先生'},
-{id:'D003',surname:'コンタ',givenName:'キツネ',school:'こもれび小',classroom:'3組',teacher:'ヤギ先生'},
-{id:'D004',surname:'ミミ',givenName:'ウサギ',school:'どんぐり小',classroom:'1組',teacher:'フクロウ先生'},
-{id:'D005',surname:'クルミ',givenName:'クマ',school:'しおかぜ小',classroom:'2組',teacher:'カモメ先生'},
-{id:'D006',surname:'ナギ',givenName:'ネコ',school:'こもれび小',classroom:'3組',teacher:'ヤギ先生'}
-];
+const demoSurnames=['モコ','ペンタ','コンタ','ミミ','クルミ','ナギ','ソラ','リン','ポポ','タマ','ルル','ハル','ノア','ココ','ロロ','トト','フウ','マル','ベル','メイ','ララ','テト','ニコ','ピピ','レオ'];
+const givenNames=['リス','ペンギン','キツネ','ウサギ','クマ','ネコ','イルカ','コアラ','ラッコ','パンダ','シカ','フクロウ','カモメ','ヤギ','ヒツジ','カワウソ','ハリネズミ','アザラシ','オオカミ','リャマ','トナカイ','ビーバー','モモンガ','フェネック','カピバラ'];
+const classTeachers=['フクロウ先生','カモメ先生','ヤギ先生','イルカ先生'];
+const demoSchools=['どんぐり小','しおかぜ小','こもれび小'];
+const roster=Array.from({length:100},(_,index)=>{const classIndex=Math.floor(index/25);return{id:`D${String(index+1).padStart(3,'0')}`,surname:demoSurnames[index%25],givenName:givenNames[(index+classIndex*7)%25],school:demoSchools[index%3],classroom:`${classIndex+1}組`,teacher:classTeachers[classIndex]}});
 const schoolSelect=$('#school');
 if(schoolSelect)schoolSelect.innerHTML='<option value="">選んでください</option><option selected>どんぐり小</option><option>しおかぜ小</option><option>こもれび小</option><option>不明</option>';
 const classTeacher=$('#class-teacher');
-if(classTeacher)classTeacher.innerHTML='<option value="">選んでください</option><option value="1組|フクロウ先生" selected>1組｜フクロウ先生</option><option value="2組|カモメ先生">2組｜カモメ先生</option><option value="3組|ヤギ先生">3組｜ヤギ先生</option>';
+if(classTeacher)classTeacher.innerHTML='<option value="">選んでください</option><option value="1組|フクロウ先生" selected>1組｜フクロウ先生</option><option value="2組|カモメ先生">2組｜カモメ先生</option><option value="3組|ヤギ先生">3組｜ヤギ先生</option><option value="4組|イルカ先生">4組｜イルカ先生</option>';
 const nameQuery=$('#name-query');
 if(nameQuery){nameQuery.value='モ';nameQuery.placeholder='例：モ、ペンタ'}
 
@@ -79,8 +76,8 @@ if(heroSlides.length>1&&galleryDots){const showHeroSlide=index=>{heroSlides[hero
 // 公式LINE・運営画面も、外部通信なしのデモとして体験できる。
 const LINE_KEY='atsumare-shimachu-line-friend';
 const isLineFriend=()=>localStorage.getItem(LINE_KEY)==='1';
-function addLineFriend(button){localStorage.setItem(LINE_KEY,'1');button.textContent='公式LINE 友だち追加済み ✓';button.disabled=true;button.style.opacity='.75'}
-function addLineGuide(){if(!completion||completion.querySelector('.demo-line-guide'))return;const guide=document.createElement('div');guide.className='demo-line-guide';guide.style.cssText='margin-top:20px;padding:18px;border-radius:16px;background:#effaf3;border:1px solid #bfe4ca;text-align:left';guide.innerHTML='<h4 style="margin:0 0 8px">公式LINEデモ</h4><p style="margin:0 0 12px;line-height:1.7">本番では最新情報や回答修正を公式LINEで受け付けます。このデモではブラウザ内だけで追加済みに切り替わります。</p><button type="button" class="button primary demo-line-button" style="width:100%;background:#06c755">'+(isLineFriend()?'公式LINE 友だち追加済み ✓':'公式LINEを友だち追加（デモ）')+'</button>';const btn=guide.querySelector('button');if(isLineFriend()){btn.disabled=true;btn.style.opacity='.75'}btn.addEventListener('click',()=>addLineFriend(btn));completion.append(guide)}
+function addLineFriend(){window.location.href='line/'}
+function addLineGuide(){if(!completion||completion.querySelector('.demo-line-guide'))return;const guide=document.createElement('div');guide.className='demo-line-guide';guide.style.cssText='margin-top:20px;padding:18px;border-radius:16px;background:#effaf3;border:1px solid #bfe4ca;text-align:left';guide.innerHTML='<h4 style="margin:0 0 8px">公式LINEデモ</h4><p style="margin:0 0 12px;line-height:1.7">本番では最新情報や回答修正を公式LINEで受け付けます。このデモではブラウザ内だけで追加済みに切り替わります。</p><button type="button" class="button primary demo-line-button" style="width:100%;background:#06c755">'+(isLineFriend()?'LINE風トーク画面を開く':'LINE風トーク画面を開く'')+'</button>';const btn=guide.querySelector('button');btn.addEventListener('click',()=>addLineFriend(btn));completion.append(guide)}
 
 if(nav&&!nav.querySelector('a[href="organizer/"]')){const organizerLink=document.createElement('a');organizerLink.href='organizer/';organizerLink.textContent='運営メンバーデモ';nav.append(organizerLink)}
-const footer=document.querySelector('footer');if(footer&&!document.querySelector('.demo-tools')){const section=document.createElement('section');section.className='demo-tools section-shell';section.style.cssText='padding-top:28px;padding-bottom:28px';section.innerHTML='<div style="padding:24px;border-radius:20px;background:#effaf3;border:1px solid #bfe4ca"><p class="section-kicker">DEMO TOOLS</p><h2 style="margin-top:0">LINE・管理画面も試せます</h2><p style="line-height:1.8">すべて架空データです。外部サービスや実在の名簿には接続しません。</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="button primary demo-line-button" style="background:#06c755">'+(isLineFriend()?'公式LINE 友だち追加済み ✓':'公式LINEを友だち追加（デモ）')+'</button><a class="button text-link" href="organizer/">運営メンバーデモを開く</a></div></div>';const btn=section.querySelector('button');if(isLineFriend()){btn.disabled=true;btn.style.opacity='.75'}btn.addEventListener('click',()=>addLineFriend(btn));footer.before(section)}
+const footer=document.querySelector('footer');if(footer&&!document.querySelector('.demo-tools')){const section=document.createElement('section');section.className='demo-tools section-shell';section.style.cssText='padding-top:28px;padding-bottom:28px';section.innerHTML='<div style="padding:24px;border-radius:20px;background:#effaf3;border:1px solid #bfe4ca"><p class="section-kicker">DEMO TOOLS</p><h2 style="margin-top:0">LINE・管理画面も試せます</h2><p style="line-height:1.8">すべて架空データです。外部サービスや実在の名簿には接続しません。</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="button primary demo-line-button" style="background:#06c755">'+(isLineFriend()?'LINE風トーク画面を開く':'LINE風トーク画面を開く'')+'</button><a class="button text-link" href="organizer/">運営メンバーデモを開く</a></div></div>';const btn=section.querySelector('button');btn.addEventListener('click',()=>addLineFriend(btn));footer.before(section)}
