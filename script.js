@@ -18,8 +18,8 @@ const eyebrow=$('.eyebrow');
 if(eyebrow)eyebrow.textContent='ATSUMARE SHIMA JUNIOR HIGH SCHOOL REUNION';
 const heroTitle=$('.hero h1');
 if(heroTitle)heroTitle.innerHTML='島に、おかえり。<br>あつまれ島中学校。';
-const location=$('.location');
-if(location)location.textContent='DONGURI ISLAND';
+const locationLabel=$('.location');
+if(locationLabel)locationLabel.textContent='DONGURI ISLAND';
 
 replaceText('nav a,h1,h2,h3,p,dd,span,strong,a,small',[
   ['糸島市立志摩中学校','あつまれ島中学校'],
@@ -37,7 +37,7 @@ replaceText('nav a,h1,h2,h3,p,dd,span,strong,a,small',[
 
 if(brand)brand.textContent='島に、おかえり。';
 if(heroTitle)heroTitle.innerHTML='島に、おかえり。<br>あつまれ島中学校。';
-if(location)location.textContent='DONGURI ISLAND';
+if(locationLabel)locationLabel.textContent='DONGURI ISLAND';
 
 const allSlides=$$('.hero-gallery .photo');
 allSlides.slice(2).forEach(slide=>slide.remove());
