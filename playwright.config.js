@@ -12,7 +12,7 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure'
   },
   projects: [
-    { name: 'mobile-chromium', use: { ...devices['iPhone 13'] } },
+    { name: 'mobile-chromium', use: { ...devices['Pixel 7'] } },
     { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'] } }
   ],
   webServer: {
