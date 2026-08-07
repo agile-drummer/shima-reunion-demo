@@ -47,9 +47,9 @@ https://agile-drummer.github.io/shima-reunion-demo/
 
 公開サイトの最下部から、次の操作を試せます。
 
-- 公式LINEを友だち追加したように見えるデモ
-- LINEログインを模した運営メンバーログイン
-- 架空名簿の絞り込み
+- LINE風トーク画面と6分割リッチメニュー
+- リッチメニューから遷移するロール別運営メンバーログイン
+- 4クラス・100人の架空名簿の絞り込み
 - 担当者、参加状況、連絡状況の更新
 - 参加意向の横棒グラフ
 - 公式LINE友だちタグ
@@ -94,3 +94,10 @@ https://agile-drummer.github.io/shima-reunion-demo/organizer/
 **あつまれ島中学校**
 
 懐かしさを、未来のつながりへ。
+
+
+## LINE風デモ画面
+
+https://agile-drummer.github.io/shima-reunion-demo/line/
+
+実際のLINEアプリは開かず、トーク画面・リッチメニュー・幹事／サポーター／一般メンバーの権限差をブラウザ内で体験できます。名簿は4クラス各25人、合計100人の架空データです。
