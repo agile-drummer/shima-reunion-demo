@@ -57,9 +57,7 @@ if(classTeacher)classTeacher.innerHTML='<option value="">選んでください</
 const nameQuery=$('#name-query');
 if(nameQuery){nameQuery.value='モ';nameQuery.placeholder='例：モ、ペンタ'}
 
-const menuButton=$('.menu-button');const nav=$('#site-nav');
-menuButton?.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!open));nav?.classList.toggle('open',!open)});
-nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton?.setAttribute('aria-expanded','false')}));
+// Mobile menu behavior is centralized in menu-fix.js.
 
 const mask=name=>name.length<=1?'＊':`${name[0]}${'＊'.repeat(Math.max(1,name.length-2))}${name.at(-1)}`;
 const openInterestSearch=$('#open-interest-search'),interestPrototype=$('#interest-prototype'),searchForm=$('#person-search-form'),intentForm=$('#intent-form'),message=$('#form-message'),candidateArea=$('#candidate-area'),candidateList=$('#candidate-list'),selectedPerson=$('#selected-person'),completion=$('#completion');let selected=null;
@@ -80,5 +78,5 @@ const isLineFriend=()=>localStorage.getItem(LINE_KEY)==='1';
 function addLineFriend(){window.location.href='line/'}
 function addLineGuide(){if(!completion||completion.querySelector('.demo-line-guide'))return;const guide=document.createElement('div');guide.className='demo-line-guide';guide.style.cssText='margin-top:20px;padding:18px;border-radius:16px;background:#effaf3;border:1px solid #bfe4ca;text-align:left';guide.innerHTML='<h4 style="margin:0 0 8px">公式LINEデモ</h4><p style="margin:0 0 12px;line-height:1.7">本番では最新情報や回答修正を公式LINEで受け付けます。このデモではブラウザ内だけで追加済みに切り替わります。</p><a class="button primary demo-line-button" style="width:100%;background:#06c755" href="line/">LINE風トーク画面を開く</a>';completion.append(guide)}
 
-if(nav&&!nav.querySelector('a[href="organizer/"]')){const organizerLink=document.createElement('a');organizerLink.href='line/';organizerLink.textContent='運営メンバーデモ';nav.append(organizerLink)}
+// Demo navigation links are also centralized in menu-fix.js.
 const footer=document.querySelector('footer');if(footer&&!document.querySelector('.demo-tools')){const section=document.createElement('section');section.className='demo-tools section-shell';section.style.cssText='padding-top:28px;padding-bottom:28px';section.innerHTML='<div style="padding:24px;border-radius:20px;background:#effaf3;border:1px solid #bfe4ca"><p class="section-kicker">DEMO TOOLS</p><h2 style="margin-top:0">LINE・管理画面も試せます</h2><p style="line-height:1.8">すべて架空データです。外部サービスや実在の名簿には接続しません。</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="button primary demo-line-button" style="background:#06c755" href="line/">LINE風トーク画面を開く</a><a class="button text-link" href="line/">運営メンバーデモを開く</a></div></div>';footer.before(section)}

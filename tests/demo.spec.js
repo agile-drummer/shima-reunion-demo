@@ -3,8 +3,24 @@ test.beforeEach(async({page})=>{await page.goto('/');await page.evaluate(()=>loc
 
 test('public page shows warm percentage-only response summary',async({page})=>{
   await expect(page.locator('#response-summary')).toBeVisible();
-  await expect(page.locator('#response-summary')).toContainText('66%');
+  await expect(page.locator('#response-summary')).toContainText('88%');
   await expect(page.locator('#response-summary')).not.toContainText('人が回答済み');
+  const summaryAfterButton = await page.locator('#open-interest-search + #response-summary').count();
+  expect(summaryAfterButton).toBe(1);
+  await expect(page.locator('.response-bar-label')).toHaveCSS('white-space','nowrap');
+  await expect(page.locator('.response-legend')).toHaveCSS('white-space','nowrap');
+});
+
+test('mobile Menu opens once and closes after navigation',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  const menu=page.getByRole('button',{name:'Menu'});
+  const nav=page.locator('#site-nav');
+  await menu.click();
+  await expect(menu).toHaveAttribute('aria-expanded','true');
+  await expect(nav).toHaveClass(/open/);
+  await nav.getByRole('link',{name:'参加してみる？'}).click();
+  await expect(menu).toHaveAttribute('aria-expanded','false');
+  await expect(nav).not.toHaveClass(/open/);
 });
 
 test('participant roster exposes four classes and excludes deceased demo member',async({page})=>{
