@@ -20,7 +20,7 @@ test('participant roster exposes four classes and excludes deceased demo member'
 
 test('LINE button opens internal LINE-style screen',async({page})=>{
   await page.locator('.demo-tools').scrollIntoViewIfNeeded();
-  await page.getByRole('button',{name:/LINE風トーク画面/}).first().click();
+  await page.locator('.demo-tools .demo-line-button').click();
   await expect(page).toHaveURL(/\/line\/?$/);
   await expect(page.getByRole('navigation',{name:'リッチメニュー'})).toBeVisible();
 });
