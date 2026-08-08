@@ -41,39 +41,38 @@ test('LINE button opens internal LINE-style screen',async({page})=>{
   await expect(page.getByRole('navigation',{name:'リッチメニュー'})).toBeVisible();
 });
 
-test('supporter starts with assigned class and has no applications',async({page})=>{
-  await page.goto('/line/');await page.getByLabel(/サポーター/).check();
-  await page.getByRole('link',{name:/メンバーログイン/}).click();
+test('organizer dashboard defaults to production-like supporter view',async({page})=>{
+  await page.goto('/organizer/');
+  await page.evaluate(()=>localStorage.clear());
+  await page.reload();
   await expect(page.getByText('サポーター',{exact:true}).first()).toBeVisible();
-  await expect(page.getByRole('button',{name:'1組'})).toHaveClass(/active/);
-  await expect(page.locator('#applications')).toHaveClass(/hidden/);
+  await expect(page.locator('#previewBanner')).toContainText('氏名はマスキング');
+  await expect(page.locator('.class-bar')).toHaveCount(4);
+  await expect(page.locator('.person h3').first()).toContainText('＊');
 });
 
-test('organizer sees IDs applications and deceased controls',async({page})=>{
-  await page.goto('/line/');await page.getByRole('link',{name:/メンバーログイン/}).click();
-  await expect(page.locator('#applications')).not.toHaveClass(/hidden/);
-  await expect(page.locator('.id-badge').first()).toContainText('D001');
-  await expect(page.locator('[data-deceased]').first()).toBeVisible();
-  await page.locator('[data-deceased]').first().click();
-  await expect(page.locator('.person.deceased').first()).toContainText('逝去（回答対象外）');
-  await expect(page.locator('#eligibleCount')).toContainText('97');
-});
-
-test('organizer has four classes of 25 and assignee labels are accessible only',async({page})=>{
-  await page.goto('/line/');await page.getByRole('link',{name:/メンバーログイン/}).click();
-  await page.getByRole('button',{name:'4組'}).click();
-  await expect(page.getByText('25人を表示')).toBeVisible();
+test('class chart updates list and all summary numbers',async({page})=>{
+  await page.goto('/organizer/');
+  await page.getByRole('button',{name:/2組/}).click();
+  await expect(page.locator('#listTitle')).toHaveText('2組');
+  await expect(page.locator('#visibleCount')).toHaveText('25');
+  await expect(page.locator('#resultCount')).toContainText('計25人');
   await expect(page.locator('.person')).toHaveCount(25);
-  await expect(page.locator('.controls strong')).toHaveCount(0);
-  await expect(page.locator('select[aria-label*="担当"]').first()).toBeVisible();
 });
 
-test('member role is read-only and deceased people are hidden',async({page})=>{
-  await page.goto('/line/');await page.getByLabel(/一般メンバー/).check();
-  await page.getByRole('link',{name:/メンバーログイン/}).click();
-  await expect(page.getByText('このロールでは閲覧のみです').first()).toBeVisible();
-  await expect(page.locator('select[data-id]')).toHaveCount(0);
-  await expect(page.locator('.person.deceased')).toHaveCount(0);
+test('response and gender conditions update figures and roster together',async({page})=>{
+  await page.goto('/organizer/');
+  await page.getByRole('button',{name:'回答済み'}).click();
+  await expect(page.locator('#answeredCount')).toHaveText('0');
+  const unanswered=Number(await page.locator('#unansweredCount').textContent());
+  await expect(page.locator('.person')).toHaveCount(unanswered);
+  await page.getByRole('button',{name:/女性/}).click();
+  await expect(page.locator('.people-columns section').nth(1).locator('.person')).toHaveCount(0);
+});
+
+test('participant Menu matches production section order',async({page})=>{
+  const labels=await page.locator('#site-nav a').allTextContents();
+  expect(labels).toEqual(['参加してみる？','同窓会について','島の今','開催まで','安心して参加するために','幹事からのご挨拶']);
 });
 
 test('pages have no uncaught errors',async({page})=>{
