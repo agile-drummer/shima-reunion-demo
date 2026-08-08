@@ -57,9 +57,7 @@ if(classTeacher)classTeacher.innerHTML='<option value="">選んでください</
 const nameQuery=$('#name-query');
 if(nameQuery){nameQuery.value='モ';nameQuery.placeholder='例：モ、ペンタ'}
 
-const menuButton=$('.menu-button');const nav=$('#site-nav');
-menuButton?.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!open));nav?.classList.toggle('open',!open)});
-nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuButton?.setAttribute('aria-expanded','false')}));
+// Mobile menu behavior is centralized in menu-fix.js.
 
 const mask=name=>name.length<=1?'＊':`${name[0]}${'＊'.repeat(Math.max(1,name.length-2))}${name.at(-1)}`;
 const openInterestSearch=$('#open-interest-search'),interestPrototype=$('#interest-prototype'),searchForm=$('#person-search-form'),intentForm=$('#intent-form'),message=$('#form-message'),candidateArea=$('#candidate-area'),candidateList=$('#candidate-list'),selectedPerson=$('#selected-person'),completion=$('#completion');let selected=null;
