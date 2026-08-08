@@ -13,8 +13,21 @@
   const mask = name => String(name || '').split(' ').map(x => x.slice(0, 1) + '＊'.repeat(Math.max(1, x.length - 1))).join(' ');
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null') || seed; } catch { return seed; } };
 
+  const rolloutCard = document.createElement('section');
+  rolloutCard.id = 'rolloutQuickLinks';
+  rolloutCard.className = 'card';
+  rolloutCard.innerHTML = `
+    <div class="change-summary-head"><div><p class="eyebrow">PHASE 1 ROLLOUT</p><h2>一次打診の準備</h2></div></div>
+    <p class="person-summary">本番と同じ順番で、通知・実機確認・少人数テストの状態を確認できます。</p>
+    <a class="change-all" href="rollout-dashboard/">一次打診 Rollout Dashboard →</a>
+    <a class="change-all" href="rollout/">実機E2Eを確認 →</a>
+    <a class="change-all" href="notification-readiness/">LINE通知 readiness →</a>`;
+  card.insertAdjacentElement('afterend', rolloutCard);
+
   function render() {
-    if (roleBadge.textContent.trim() === 'メンバー') {
+    const isMember = roleBadge.textContent.trim() === 'メンバー';
+    rolloutCard.hidden = isMember;
+    if (isMember) {
       card.hidden = true;
       return;
     }
