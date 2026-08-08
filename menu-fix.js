@@ -26,21 +26,6 @@
   const nav = document.querySelector('#site-nav');
   const button = document.querySelector('.menu-button');
 
-  if (nav) {
-    if (!nav.querySelector('a[href="#official-line-contact"]')) {
-      const lineLink = document.createElement('a');
-      lineLink.href = '#official-line-contact';
-      lineLink.textContent = '公式LINE・お問い合わせ';
-      nav.append(lineLink);
-    }
-    if (!nav.querySelector('a[href="organizer/"]')) {
-      const organizerLink = document.createElement('a');
-      organizerLink.href = 'organizer/';
-      organizerLink.textContent = '運営メンバーデモ';
-      nav.append(organizerLink);
-    }
-  }
-
   if (button && nav) {
     const closeMenu = () => {
       nav.classList.remove('open');
