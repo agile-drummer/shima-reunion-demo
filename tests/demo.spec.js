@@ -48,6 +48,10 @@ test('organizer dashboard defaults to production-like supporter view',async({pag
   await expect(page.getByText('サポーター',{exact:true}).first()).toBeVisible();
   await expect(page.locator('#previewBanner')).toContainText('氏名はマスキング');
   await expect(page.locator('.class-bar')).toHaveCount(4);
+  await expect(page.locator('#listTitle')).toHaveText('3組');
+  await expect(page.locator('#visibleCount')).toHaveText('25');
+  const trackBox=await page.locator('.track').first().boundingBox();
+  expect(trackBox.height).toBeGreaterThan(trackBox.width);
   await expect(page.locator('.person h3').first()).toContainText('＊');
 });
 
@@ -70,9 +74,15 @@ test('response and gender conditions update figures and roster together',async({
   await expect(page.locator('.people-columns section').nth(1).locator('.person')).toHaveCount(0);
 });
 
-test('participant Menu matches production section order',async({page})=>{
-  const labels=await page.locator('#site-nav a').allTextContents();
-  expect(labels).toEqual(['参加してみる？','同窓会について','島の今','開催まで','安心して参加するために','幹事からのご挨拶']);
+test('participant Menu matches production structure and member login opens supporter view',async({page})=>{
+  const labels=(await page.locator('#site-nav > a').allTextContents()).map(x=>x.replace(/\s+/g,' ').trim());
+  expect(labels).toEqual(['参加してみる？','幹事からのご挨拶','お問い合わせ LINE','メンバーログイン 🔐']);
+  await page.setViewportSize({width:390,height:844});
+  await page.getByRole('button',{name:'Menu'}).click();
+  await page.getByRole('link',{name:/メンバーログイン/}).click();
+  await expect(page).toHaveURL(/\/organizer\/?$/);
+  await expect(page.locator('#roleBadge')).toHaveText('サポーター');
+  await expect(page.locator('#listTitle')).toHaveText('3組');
 });
 
 test('pages have no uncaught errors',async({page})=>{
