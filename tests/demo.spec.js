@@ -34,6 +34,31 @@ test('participant roster exposes four classes and excludes deceased demo member'
   await expect(page.getByText('候補が見つかりませんでした')).toBeVisible();
 });
 
+test('participant can answer, change response in my page, and see latest state after reload',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.getByRole('button',{name:'ちょっと答えてみる'}).click();
+  await page.locator('#school').selectOption({label:'どんぐり小'});
+  await page.locator('#class-teacher').selectOption({label:'1組｜フクロウ先生'});
+  await page.locator('#name-query').fill('モ');
+  await page.getByRole('button',{name:'わたしを探す'}).click();
+  await page.locator('#candidate-list .candidate').first().click();
+  await page.locator('input[name="intent"][value="参加したい"]').check();
+  await page.locator('#privacy-agreement').check();
+  await page.getByRole('button',{name:'この気持ちを送る'}).click();
+
+  await expect(page.locator('#my-page')).toBeVisible();
+  await expect(page.locator('#demo-current-intent')).toContainText('参加したい');
+  await page.getByRole('button',{name:/今回はむずかしそう/}).click();
+  await expect(page.locator('#demo-update-message')).toContainText('幹事への個別連絡は不要です');
+  await expect(page.locator('#demo-current-intent')).toContainText('むずかしそう');
+
+  await page.reload();
+  await expect(page.locator('#my-page')).toBeVisible();
+  await expect(page.locator('#demo-current-intent')).toContainText('むずかしそう');
+  const rows=await page.evaluate(()=>JSON.parse(localStorage.getItem('atsumare-shimachu-demo')||'[]'));
+  expect(rows.filter(row=>row.id===rows.at(-1).id)).toHaveLength(1);
+});
+
 test('LINE button opens internal LINE-style screen',async({page})=>{
   await page.locator('.demo-tools').scrollIntoViewIfNeeded();
   await page.locator('.demo-tools .demo-line-button').click();
