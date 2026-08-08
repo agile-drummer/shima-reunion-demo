@@ -99,6 +99,20 @@ test('response and gender conditions update figures and roster together',async({
   await expect(page.locator('.people-columns section').nth(1).locator('.person')).toHaveCount(0);
 });
 
+test('response change history shows unconfirmed changes and can mark them confirmed',async({page})=>{
+  await page.goto('/organizer/audit/');
+  await page.evaluate(()=>localStorage.removeItem('atsumare-response-change-history'));
+  await page.reload();
+  await expect(page.getByRole('heading',{name:'運営履歴'})).toBeVisible();
+  await expect(page.locator('#unconfirmedCount')).toHaveText('1');
+  await expect(page.locator('.card').filter({hasText:'参加したい'}).first()).toContainText('今回は欠席予定');
+  await page.getByRole('button',{name:'確認済みにする'}).click();
+  await expect(page.locator('#unconfirmedCount')).toHaveText('0');
+  await expect(page.locator('.status').first()).toHaveText('確認済み');
+  await page.reload();
+  await expect(page.locator('#unconfirmedCount')).toHaveText('0');
+});
+
 test('participant Menu matches production structure and member login opens supporter view',async({page})=>{
   const labels=(await page.locator('#site-nav > a').allTextContents()).map(x=>x.replace(/\s+/g,' ').trim());
   expect(labels).toEqual(['参加してみる？','幹事からのご挨拶','お問い合わせ LINE','メンバーログイン 🔐']);
@@ -112,6 +126,6 @@ test('participant Menu matches production structure and member login opens suppo
 
 test('pages have no uncaught errors',async({page})=>{
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  for(const path of ['/','/line/','/organizer/']){await page.goto(path);await page.waitForTimeout(150)}
+  for(const path of ['/','/line/','/organizer/','/organizer/audit/']){await page.goto(path);await page.waitForTimeout(150)}
   expect(errors).toEqual([]);
 });
