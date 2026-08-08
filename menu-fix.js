@@ -97,9 +97,8 @@
           <h2 id="official-line-contact-title">幹事へのご連絡はこちら</h2>
           <p>同窓会についての質問、回答内容の修正、サポーター希望などは、公式LINEから幹事へお知らせください。この公開デモでは外部通信せず、友だち追加済みの状態だけをブラウザに保存します。</p>
         </div>
-        <button type="button" class="demo-line-button"></button>
+        <a class="demo-line-button" href="line/">LINE風トーク画面を開く</a>
       </div>`;
-    section.querySelector('.demo-line-button')?.addEventListener('click', addLineFriend);
     if (footer) footer.before(section);
     else document.body.append(section);
   }
@@ -112,8 +111,7 @@
     guide.innerHTML = `
       <h4>ご連絡・最新情報は公式LINEへ</h4>
       <p>本番では日程や会場のお知らせ、回答内容の修正、サポーター希望などを公式LINEで受け付けます。</p>
-      <button type="button" class="demo-line-button"></button>`;
-    guide.querySelector('.demo-line-button')?.addEventListener('click', addLineFriend);
+      <a class="demo-line-button" href="line/">LINE風トーク画面を開く</a>`;
     completion.append(guide);
     updateLineButtons();
   };
