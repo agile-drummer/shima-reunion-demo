@@ -19,6 +19,7 @@
     .demo-line-button[disabled]{opacity:.72;cursor:default}
     .completion-line{margin-top:20px;padding:18px;border-radius:16px;background:#effaf3;border:1px solid #bfe4ca;text-align:left}
     .completion-line h4{margin:0 0 9px;color:#173f50;font-size:17px}.completion-line p{margin:5px 0;line-height:1.65}.completion-line .demo-line-button{width:100%;margin-top:12px}
+    .footer-trust{max-width:760px;margin:0 auto 32px;padding:18px 20px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(255,255,255,.07);text-align:left}.footer-trust strong{display:block;margin-bottom:6px;color:#fff}.footer-trust p{margin:0 0 8px;color:#dcecef;font-size:13px;line-height:1.7}.footer-trust a{color:#fff;text-decoration:underline;font-size:13px;font-weight:700}
     @media(max-width:720px){.official-line-contact-card{grid-template-columns:1fr}.demo-line-button{width:100%;min-width:0}}
   `;
   document.head.append(style);
@@ -64,11 +65,6 @@
     });
   };
 
-  const addLineFriend = () => {
-    try { localStorage.setItem(LINE_KEY, '1'); } catch {}
-    updateLineButtons();
-  };
-
   if (!document.querySelector('#official-line-contact')) {
     const footer = document.querySelector('footer');
     const section = document.createElement('section');
@@ -86,6 +82,17 @@
       </div>`;
     if (footer) footer.before(section);
     else document.body.append(section);
+  }
+
+  const footer = document.querySelector('footer');
+  if (footer && !footer.querySelector('.footer-trust')) {
+    const trust = document.createElement('div');
+    trust.className = 'footer-trust';
+    trust.innerHTML = `
+      <strong>🔒 安心してご利用いただくために</strong>
+      <p>このデモはHTTPS通信を前提とし、本番ではお預かりした情報を同窓会の準備・運営・本人確認など必要な目的に限定して扱います。このデモでは架空データのみを使用しています。</p>
+      <a href="privacy/">プライバシー・安心運営方針を見る →</a>`;
+    footer.prepend(trust);
   }
 
   const ensureCompletionLine = () => {
