@@ -14,7 +14,7 @@ test('public page shows warm percentage-only response summary',async({page})=>{
 test('mobile Menu opens once and closes after navigation',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   const menu=page.getByRole('button',{name:'Menu'});
-  const nav=page.getByRole('navigation',{name:'メインメニュー'});
+  const nav=page.locator('#site-nav');
   await menu.click();
   await expect(menu).toHaveAttribute('aria-expanded','true');
   await expect(nav).toHaveClass(/open/);
